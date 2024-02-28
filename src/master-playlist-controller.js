@@ -144,7 +144,8 @@ export class MasterPlaylistController extends videojs.EventTarget {
       sourceType,
       cacheEncryptionKeys,
       handlePartialData,
-      experimentalBufferBasedABR
+      experimentalBufferBasedABR,
+      forceNoVideo
     } = options;
 
     if (!src) {
@@ -225,7 +226,8 @@ export class MasterPlaylistController extends videojs.EventTarget {
       cacheEncryptionKeys,
       handlePartialData,
       sourceUpdater: this.sourceUpdater_,
-      timelineChangeController: this.timelineChangeController_
+      timelineChangeController: this.timelineChangeController_,
+      forceNoVideo
     };
 
     // The source type check not only determines whether a special DASH playlist loader

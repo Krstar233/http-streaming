@@ -248,7 +248,8 @@
     'buffer-water',
     'override-native',
     'preload',
-    'mirror-source'
+    'mirror-source',
+    'force-no-video'
   ].forEach(function(name) {
     stateEls[name] = document.getElementById(name);
   });
@@ -309,6 +310,13 @@
     });
 
     stateEls.partial.addEventListener('change', function(event) {
+      saveState();
+
+      // reload the player and scripts
+      stateEls.minified.dispatchEvent(newEvent('change'));
+    });
+
+    stateEls['force-no-video'].addEventListener('change', function(event) {
       saveState();
 
       // reload the player and scripts
@@ -386,7 +394,8 @@
               overrideNative: getInputValue(stateEls['override-native']),
               handlePartialData: getInputValue(stateEls.partial),
               experimentalBufferBasedABR: getInputValue(stateEls['buffer-water']),
-              experimentalLLHLS: getInputValue(stateEls.llhls)
+              experimentalLLHLS: getInputValue(stateEls.llhls),
+              forceNoVideo: getInputValue(stateEls['force-no-video'])
             }
           }
         });

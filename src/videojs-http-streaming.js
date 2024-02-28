@@ -623,6 +623,7 @@ class VhsHandler extends Component {
     this.options_.customTagMappers = this.options_.customTagMappers || [];
     this.options_.cacheEncryptionKeys = this.options_.cacheEncryptionKeys || false;
     this.options_.handlePartialData = this.options_.handlePartialData || false;
+    this.options_.forceNoVideo = this.options_.forceNoVideo || false;
 
     if (typeof this.options_.blacklistDuration !== 'number') {
       this.options_.blacklistDuration = 5 * 60;
@@ -672,7 +673,8 @@ class VhsHandler extends Component {
       'initialPlaylistSelector',
       'experimentalBufferBasedABR',
       'liveRangeSafeTimeDelta',
-      'experimentalLLHLS'
+      'experimentalLLHLS',
+      'forceNoVideo'
     ].forEach((option) => {
       if (typeof this.source_[option] !== 'undefined') {
         this.options_[option] = this.source_[option];

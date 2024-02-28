@@ -489,6 +489,7 @@ export default class SegmentLoader extends videojs.EventTarget {
     this.inbandTextTracks_ = settings.inbandTextTracks;
     this.state_ = 'INIT';
     this.handlePartialData_ = settings.handlePartialData;
+    this.forceNoVideo_ = settings.forceNoVideo;
     this.timelineChangeController_ = settings.timelineChangeController;
     this.shouldSaveSegmentTimingInfo_ = true;
     this.parse708captions_ = settings.parse708captions;
@@ -2410,6 +2411,7 @@ export default class SegmentLoader extends videojs.EventTarget {
       decryptionWorker: this.decrypter_,
       segment: simpleSegment,
       handlePartialData: this.handlePartialData_,
+      forceNoVideo: this.forceNoVideo_,
       abortFn: this.handleAbort_.bind(this, segmentInfo),
       progressFn: this.handleProgress_.bind(this),
       trackInfoFn: this.handleTrackInfo_.bind(this),

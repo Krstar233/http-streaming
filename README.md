@@ -1,3 +1,25 @@
+# 【置顶】基于 v2.7.0 的特殊分支
+
+### 新增功能
+
+- **添加配置项 forceNoVideo，用于强制不拉视频流，注意只适用于片段格式是 TS 封装的 HLS 流，不适用于片段格式是 FMP4 格式的 HLS 流。**
+
+使用方式：
+
+```js
+player = videojs(videoEl, {
+            html5: {
+              vhs: {
+                forceNoVideo: true
+              }
+            }
+          });
+```
+
+具体效果可在项目 demo 中 forceNoVideo 选项进行测试。
+
+----
+
 <img width=300 src="./logo.svg" alt="VHS Logo consisting of a VHS tape, the Video.js logo and the words VHS" />
 
 # videojs-http-streaming (VHS)
@@ -18,80 +40,84 @@ Video.js Compatibility: 6.0, 7.0
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
-- [Installation](#installation)
-  - [NPM](#npm)
-  - [CDN](#cdn)
-  - [Releases](#releases)
-  - [Manual Build](#manual-build)
-- [Contributing](#contributing)
-- [Troubleshooting](#troubleshooting)
-- [Talk to us](#talk-to-us)
-- [Getting Started](#getting-started)
-- [Compatibility](#compatibility)
-  - [Browsers which support MSE](#browsers-which-support-mse)
-  - [Native only](#native-only)
-  - [Flash Support](#flash-support)
-  - [DRM](#drm)
-- [Documentation](#documentation)
-  - [Options](#options)
-    - [How to use](#how-to-use)
-      - [Initialization](#initialization)
-      - [Source](#source)
-    - [List](#list)
-      - [withCredentials](#withcredentials)
-      - [handleManifestRedirects](#handlemanifestredirects)
-      - [useCueTags](#usecuetags)
-      - [parse708captions](#parse708captions)
-      - [overrideNative](#overridenative)
-      - [blacklistDuration](#blacklistduration)
-      - [bandwidth](#bandwidth)
-      - [useBandwidthFromLocalStorage](#usebandwidthfromlocalstorage)
-      - [enableLowInitialPlaylist](#enablelowinitialplaylist)
-      - [limitRenditionByPlayerDimensions](#limitrenditionbyplayerdimensions)
-      - [useDevicePixelRatio](#usedevicepixelratio)
-      - [smoothQualityChange](#smoothqualitychange)
-      - [allowSeeksWithinUnsafeLiveWindow](#allowseekswithinunsafelivewindow)
-      - [customTagParsers](#customtagparsers)
-      - [customTagMappers](#customtagmappers)
-      - [cacheEncryptionKeys](#cacheencryptionkeys)
-      - [handlePartialData](#handlepartialdata)
-      - [liveRangeSafeTimeDelta](#liverangesafetimedelta)
-  - [Runtime Properties](#runtime-properties)
-    - [vhs.playlists.master](#vhsplaylistsmaster)
-    - [vhs.playlists.media](#vhsplaylistsmedia)
-    - [vhs.systemBandwidth](#vhssystembandwidth)
-    - [vhs.bandwidth](#vhsbandwidth)
-    - [vhs.throughput](#vhsthroughput)
-    - [vhs.selectPlaylist](#vhsselectplaylist)
-    - [vhs.representations](#vhsrepresentations)
-    - [vhs.xhr](#vhsxhr)
-    - [vhs.stats](#vhsstats)
-  - [Events](#events)
-    - [loadedmetadata](#loadedmetadata)
-  - [VHS Usage Events](#vhs-usage-events)
-    - [Presence Stats](#presence-stats)
-    - [Use Stats](#use-stats)
-  - [In-Band Metadata](#in-band-metadata)
-  - [Segment Metadata](#segment-metadata)
-  - [Object as Source](#object-as-source)
-- [Hosting Considerations](#hosting-considerations)
-- [Known Issues and Workarounds](#known-issues-and-workarounds)
-  - [Fragmented MP4 Support](#fragmented-mp4-support)
-  - [Assets with an Audio-Only Rate Get Stuck in Audio-Only](#assets-with-an-audio-only-rate-get-stuck-in-audio-only)
-  - [DASH Assets with `$Time` Interpolation and `SegmentTimeline`s with No `t`](#dash-assets-with-time-interpolation-and-segmenttimelines-with-no-t)
-- [Testing](#testing)
-- [Debugging](#debugging)
-- [Release History](#release-history)
-- [Building](#building)
-- [Development](#development)
-  - [Tools](#tools)
-  - [Commands](#commands)
+- [【置顶】基于 v2.7.0 的特殊分支](#置顶基于-v270-的特殊分支)
+  - [新增功能](#新增功能)
+- [videojs-http-streaming (VHS)](#videojs-http-streaming-vhs)
+  - [Installation](#installation)
+    - [NPM](#npm)
+    - [CDN](#cdn)
+    - [Releases](#releases)
+    - [Manual Build](#manual-build)
+  - [Contributing](#contributing)
+  - [Troubleshooting](#troubleshooting)
+  - [Talk to us](#talk-to-us)
+  - [Getting Started](#getting-started)
+  - [Compatibility](#compatibility)
+    - [Browsers which support MSE](#browsers-which-support-mse)
+    - [Native only](#native-only)
+    - [Flash Support](#flash-support)
+    - [DRM](#drm)
+  - [Documentation](#documentation)
+    - [Options](#options)
+      - [How to use](#how-to-use)
+        - [Initialization](#initialization)
+        - [Source](#source)
+      - [List](#list)
+        - [withCredentials](#withcredentials)
+        - [handleManifestRedirects](#handlemanifestredirects)
+        - [useCueTags](#usecuetags)
+        - [parse708captions](#parse708captions)
+        - [overrideNative](#overridenative)
+        - [blacklistDuration](#blacklistduration)
+        - [bandwidth](#bandwidth)
+        - [useBandwidthFromLocalStorage](#usebandwidthfromlocalstorage)
+        - [enableLowInitialPlaylist](#enablelowinitialplaylist)
+        - [limitRenditionByPlayerDimensions](#limitrenditionbyplayerdimensions)
+        - [useDevicePixelRatio](#usedevicepixelratio)
+        - [smoothQualityChange](#smoothqualitychange)
+        - [allowSeeksWithinUnsafeLiveWindow](#allowseekswithinunsafelivewindow)
+        - [customTagParsers](#customtagparsers)
+        - [customTagMappers](#customtagmappers)
+        - [cacheEncryptionKeys](#cacheencryptionkeys)
+        - [handlePartialData](#handlepartialdata)
+        - [liveRangeSafeTimeDelta](#liverangesafetimedelta)
+    - [Runtime Properties](#runtime-properties)
+      - [vhs.playlists.master](#vhsplaylistsmaster)
+      - [vhs.playlists.media](#vhsplaylistsmedia)
+      - [vhs.systemBandwidth](#vhssystembandwidth)
+      - [vhs.bandwidth](#vhsbandwidth)
+      - [vhs.throughput](#vhsthroughput)
+      - [vhs.selectPlaylist](#vhsselectplaylist)
+      - [vhs.representations](#vhsrepresentations)
+      - [vhs.xhr](#vhsxhr)
+      - [vhs.stats](#vhsstats)
+    - [Events](#events)
+      - [loadedmetadata](#loadedmetadata)
+    - [VHS Usage Events](#vhs-usage-events)
+      - [Presence Stats](#presence-stats)
+      - [Use Stats](#use-stats)
+    - [In-Band Metadata](#in-band-metadata)
+    - [Segment Metadata](#segment-metadata)
+    - [Object as Source](#object-as-source)
+  - [Hosting Considerations](#hosting-considerations)
+  - [Known Issues and Workarounds](#known-issues-and-workarounds)
+    - [Fragmented MP4 Support](#fragmented-mp4-support)
+    - [Assets with an Audio-Only Rate Get Stuck in Audio-Only](#assets-with-an-audio-only-rate-get-stuck-in-audio-only)
+    - [DASH Assets with `$Time` Interpolation and `SegmentTimeline`s with No `t`](#dash-assets-with-time-interpolation-and-segmenttimelines-with-no-t)
+  - [Testing](#testing)
+  - [Debugging](#debugging)
+  - [Release History](#release-history)
+  - [Building](#building)
+  - [Development](#development)
+    - [Tools](#tools)
+    - [Commands](#commands)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Installation
+
 ### NPM
+
 To install `videojs-http-streaming` with npm run
 
 ```bash
@@ -99,24 +125,31 @@ npm install --save @videojs/http-streaming
 ```
 
 ### CDN
+
 Select a version of VHS from the [CDN](https://unpkg.com/@videojs/http-streaming/dist/)
 
 ### Releases
+
 Download a release of [videojs-http-streaming](https://github.com/videojs/http-streaming/releases)
 
 ### Manual Build
+
 Download a copy of this git repository and then follow the steps in [Building](#building)
 
 ## Contributing
+
 See [CONTRIBUTING.md](/CONTRIBUTING.md)
 
 ## Troubleshooting
+
 See [our troubleshooting guide](/docs/troubleshooting.md)
 
 ## Talk to us
+
 Drop by our slack channel (#playback) on the [Video.js slack][slack-link].
 
 ## Getting Started
+
 This library is included in video.js 7 by default, if you are using an older version of video.js then
 get a copy of [videojs-http-streaming](#installation) and include it in your page along with video.js:
 
@@ -159,9 +192,10 @@ These browsers have some level of native HLS support, which will be used unless 
 - Mac Safari
 - iOS Safari
 
-Mac Safari does have MSE support, but native HLS is recommended 
+Mac Safari does have MSE support, but native HLS is recommended
 
 ### Flash Support
+
 This plugin does not support Flash playback. Instead, it is recommended that users use the [videojs-flashls-source-handler](https://github.com/brightcove/videojs-flashls-source-handler) plugin as a fallback option for browsers that don't have a native
 [HLS](https://caniuse.com/#feat=http-live-streaming)/[DASH](https://caniuse.com/#feat=mpeg-dash) player or support for [Media Source Extensions](http://caniuse.com/#feat=mediasource).
 
@@ -172,6 +206,7 @@ DRM is supported through [videojs-contrib-eme](https://github.com/videojs/videoj
 Detailed option information can be found in the [videojs-contrib-eme README](https://github.com/videojs/videojs-contrib-eme/blob/master/README.md).
 
 ## Documentation
+
 [HTTP Live Streaming](https://developer.apple.com/streaming/) (HLS) has
 become a de-facto standard for streaming video on mobile devices
 thanks to its native support on iOS and Android. There are a number of
@@ -229,9 +264,11 @@ For a more complete list of supported and missing features, refer to
 [this doc](docs/supported-features.md).
 
 ### Options
+
 #### How to use
 
 ##### Initialization
+
 You may pass in an options object to the hls source handler at player
 initialization. You can pass in options just like you would for other
 parts of video.js:
@@ -248,6 +285,7 @@ videojs(video, {
 ```
 
 ##### Source
+
 Some options, such as `withCredentials` can be passed in to vhs during
 `player.src`
 
@@ -263,10 +301,13 @@ player.src({
 ```
 
 #### List
+
 ##### withCredentials
-* Type: `boolean`
-* can be used as a source option
-* can be used as an initialization option
+
+- Type: `boolean`
+
+- can be used as a source option
+- can be used as an initialization option
 
 When the `withCredentials` property is set to `true`, all XHR requests for
 manifests and segments would have `withCredentials` set to `true` as well. This
@@ -279,18 +320,22 @@ See html5rocks's [article](http://www.html5rocks.com/en/tutorials/cors/)
 for more info.
 
 ##### handleManifestRedirects
-* Type: `boolean`
-* Default: `false`
-* can be used as a source option
-* can be used as an initialization option
+
+- Type: `boolean`
+
+- Default: `false`
+- can be used as a source option
+- can be used as an initialization option
 
 When the `handleManifestRedirects` property is set to `true`, manifest requests
 which are redirected will have their URL updated to the new URL for future
 requests.
 
 ##### useCueTags
-* Type: `boolean`
-* can be used as an initialization option
+
+- Type: `boolean`
+
+- can be used as an initialization option
 
 When the `useCueTags` property is set to `true,` a text track is created with
 label 'ad-cues' and kind 'metadata'. The track is then added to
@@ -320,15 +365,19 @@ cuesTrack.addEventListener('cuechange', function() {
 ```
 
 ##### parse708captions
-* Type: `boolean`
-* Default: `true`
-* can be used as an initialization option
+
+- Type: `boolean`
+
+- Default: `true`
+- can be used as an initialization option
 
 When set to `false`, 708 captions in the stream are not parsed and will not show up in text track lists or the captions menu.
 
 ##### overrideNative
-* Type: `boolean`
-* can be used as an initialization option
+
+- Type: `boolean`
+
+- can be used as an initialization option
 
 Try to use videojs-http-streaming even on platforms that provide some
 level of HLS support natively. There are a number of platforms that
@@ -354,8 +403,10 @@ var player = videojs('playerId', {
 Since MSE playback may be desirable on all browsers with some native support other than Safari, `overrideNative: !videojs.browser.IS_SAFARI` could be used.
 
 ##### blacklistDuration
-* Type: `number`
-* can be used as an initialization option
+
+- Type: `number`
+
+- can be used as an initialization option
 
 When the `blacklistDuration` property is set to a time duration in seconds,
 if a playlist is blacklisted, it will be blacklisted for a period of that
@@ -363,31 +414,39 @@ customized duration. This enables the blacklist duration to be configured
 by the user.
 
 ##### bandwidth
-* Type: `number`
-* can be used as an initialization option
+
+- Type: `number`
+
+- can be used as an initialization option
 
 When the `bandwidth` property is set (bits per second), it will be used in
 the calculation for initial playlist selection, before more bandwidth
 information is seen by the player.
 
 ##### useBandwidthFromLocalStorage
-* Type: `boolean`
-* can be used as an initialization option
+
+- Type: `boolean`
+
+- can be used as an initialization option
 
 If true, `bandwidth` and `throughput` values are stored in and retrieved from local
 storage on startup (for initial rendition selection). This setting is `false` by default.
 
 ##### enableLowInitialPlaylist
-* Type: `boolean`
-* can be used as an initialization option
+
+- Type: `boolean`
+
+- can be used as an initialization option
 
 When `enableLowInitialPlaylist` is set to true, it will be used to select
 the lowest bitrate playlist initially.  This helps to decrease playback start time.
 This setting is `false` by default.
 
 ##### limitRenditionByPlayerDimensions
-* Type: `boolean`
-* can be used as an initialization option
+
+- Type: `boolean`
+
+- can be used as an initialization option
 
 When `limitRenditionByPlayerDimensions` is set to true, rendition
 selection logic will take into account the player size and rendition
@@ -395,16 +454,20 @@ resolutions when making a decision.
 This setting is `true` by default.
 
 ##### useDevicePixelRatio
-* Type: `boolean`
-* can be used as an initialization option.
+
+- Type: `boolean`
+
+- can be used as an initialization option.
 
 If true, this will take the device pixel ratio into account when doing rendition switching. This means that if you have a player with the width of `540px` in a high density display with a device pixel ratio of 2, a rendition of `1080p` will be allowed.
 This setting is `false` by default.
 
 ##### smoothQualityChange
-* Type: `boolean`
-* can be used as a source option
-* can be used as an initialization option
+
+- Type: `boolean`
+
+- can be used as a source option
+- can be used as an initialization option
 
 When the `smoothQualityChange` property is set to `true`, a manual quality
 change triggered via the [representations API](#vhsrepresentations) will use
@@ -413,13 +476,15 @@ quality switching. Using smooth quality switching will mean no loading spinner
 will appear during quality switches, but will cause quality switches to only
 be visible after a few seconds.
 
-Note that this _only_ affects quality changes triggered via the representations
+Note that this *only* affects quality changes triggered via the representations
 API; automatic quality switches based on available bandwidth will always be
 smooth switches.
 
 ##### allowSeeksWithinUnsafeLiveWindow
-* Type: `boolean`
-* can be used as a source option
+
+- Type: `boolean`
+
+- can be used as a source option
 
 When `allowSeeksWithinUnsafeLiveWindow` is set to `true`, if the active playlist is live
 and a seek is made to a time between the safe live point (end of manifest minus three
@@ -437,36 +502,47 @@ content.
 The property defaults to `false`.
 
 ##### customTagParsers
-* Type: `Array`
-* can be used as a source option
 
-With `customTagParsers` you can pass an array of custom m3u8 tag parser objects. See https://github.com/videojs/m3u8-parser#custom-parsers
+- Type: `Array`
+
+- can be used as a source option
+
+With `customTagParsers` you can pass an array of custom m3u8 tag parser objects. See <https://github.com/videojs/m3u8-parser#custom-parsers>
 
 ##### customTagMappers
-* Type: `Array`
-* can be used as a source option
 
-Similar to `customTagParsers`, with `customTagMappers` you can pass an array of custom m3u8 tag mapper objects. See https://github.com/videojs/m3u8-parser#custom-parsers
+- Type: `Array`
+
+- can be used as a source option
+
+Similar to `customTagParsers`, with `customTagMappers` you can pass an array of custom m3u8 tag mapper objects. See <https://github.com/videojs/m3u8-parser#custom-parsers>
 
 ##### cacheEncryptionKeys
-* Type: `boolean`
-* can be used as a source option
-* can be used as an initialization option
+
+- Type: `boolean`
+
+- can be used as a source option
+- can be used as an initialization option
 
 This option forces the player to cache AES-128 encryption keys internally instead of requesting the key alongside every segment request.
 This option defaults to `false`.
 
 ##### handlePartialData
-* Type: `boolean`,
-* Default: `false`
-* Use partial appends in the transmuxer and segment loader
+
+- Type: `boolean`,
+
+- Default: `false`
+- Use partial appends in the transmuxer and segment loader
 
 ##### liveRangeSafeTimeDelta
-* Type: `number`,
-* Default: [`SAFE_TIME_DELTA`](https://github.com/videojs/http-streaming/blob/e7cb63af010779108336eddb5c8fd138d6390e95/src/ranges.js#L17)
-* Allow to  re-define length (in seconds) of time delta when you compare current time and the end of the buffered range.
+
+- Type: `number`,
+
+- Default: [`SAFE_TIME_DELTA`](https://github.com/videojs/http-streaming/blob/e7cb63af010779108336eddb5c8fd138d6390e95/src/ranges.js#L17)
+- Allow to  re-define length (in seconds) of time delta when you compare current time and the end of the buffered range.
 
 ### Runtime Properties
+
 Runtime properties are attached to the tech object when HLS is in
 use. You can get a reference to the VHS source handler like this:
 
@@ -482,6 +558,7 @@ deploying videojs-http-streaming on your own website and want to make a
 couple tweaks though, go for it!
 
 #### vhs.playlists.master
+
 Type: `object`
 
 An object representing the parsed master playlist. If a media playlist
@@ -489,6 +566,7 @@ is loaded directly, a master playlist with only one entry will be
 created.
 
 #### vhs.playlists.media
+
 Type: `function`
 
 A function that can be used to retrieve or modify the currently active
@@ -502,6 +580,7 @@ playlist. Once it has been retreived, it will become the active media
 playlist.
 
 #### vhs.systemBandwidth
+
 Type: `number`
 
 `systemBandwidth` is a combination of two serial processes' bitrates. The first
@@ -514,6 +593,7 @@ Since the two process are serial, the overall system bandwidth is given by:
 `systemBandwidth = 1 / (1 / bandwidth + 1 / throughput)`
 
 #### vhs.bandwidth
+
 Type: `number`
 
 The number of bits downloaded per second in the last segment download.
@@ -525,11 +605,13 @@ this value as soon as the HLS tech has loaded to provide an initial
 bandwidth estimate.
 
 #### vhs.throughput
+
 Type: `number`
 
 The number of bits decrypted, transmuxed, and appended per second as a cumulative average across active processing time.
 
 #### vhs.selectPlaylist
+
 Type: `function`
 
 A function that returns the media playlist object to use to download
@@ -544,6 +626,7 @@ function below to selectively enable or disable a playlist from the
 adaptive streaming logic.
 
 #### vhs.representations
+
 Type: `function`
 
 It is recommended to include the [videojs-contrib-quality-levels](https://github.com/videojs/videojs-contrib-quality-levels) plugin to your page so that videojs-http-streaming will automatically populate the QualityLevelList exposed on the player by the plugin. You can access this list by calling `player.qualityLevels()`. See the [videojs-contrib-quality-levels project page](https://github.com/videojs/videojs-contrib-quality-levels) for more information on how to use the api.
@@ -584,6 +667,7 @@ player.tech().vhs.representations().forEach(function(rep) {
 ```
 
 #### vhs.xhr
+
 Type: `function`
 
 The xhr function that is used by HLS internally is exposed on the per-
@@ -594,6 +678,7 @@ with an object containing the options that will be used to create the
 xhr request.
 
 Example:
+
 ```javascript
 player.tech().vhs.xhr.beforeRequest = function(options) {
   options.uri = options.uri.replace('example.com', 'foo.com');
@@ -609,6 +694,7 @@ browsers the video source should be set at runtime once the video player
 is ready.
 
 Example
+
 ```javascript
 videojs.Vhs.xhr.beforeRequest = function(options) {
   /*
@@ -631,6 +717,7 @@ For information on the type of options that you can modify see the
 documentation at [https://github.com/Raynos/xhr](https://github.com/Raynos/xhr).
 
 #### vhs.stats
+
 Type: `object`
 
 This object contains a summary of HLS and player related stats.
@@ -656,8 +743,8 @@ This object contains a summary of HLS and player related stats.
 | timestamp             | number | Timestamp of when `vhs.stats` was accessed |
 | videoPlaybackQuality  | object | Media playback quality metrics as specified by the [W3C's Media Playback Quality API](https://wicg.github.io/media-playback-quality/) |
 
-
 ### Events
+
 Standard HTML video events are handled by video.js automatically and
 are triggered on the player object.
 
@@ -729,8 +816,8 @@ Each of the following usage events are fired per use:
 | vhs-error-reload | the reloadSourceOnError plugin reloaded a source |
 | vhs-error-reload-canceled | an error occurred too soon after the last reload, so we didn't reload again (to prevent error loops) |
 
-
 ### In-Band Metadata
+
 The HLS tech supports [timed
 metadata](https://developer.apple.com/library/ios/#documentation/AudioVideo/Conceptual/HTTP_Live_Streaming_Metadata_Spec/Introduction/Introduction.html)
 embedded as [ID3 tags](http://id3.org/id3v2.3.0). When a stream is
@@ -752,6 +839,7 @@ There are lots of guides and references to using text tracks [around
 the web](http://www.html5rocks.com/en/tutorials/track/basics/).
 
 ### Segment Metadata
+
 You can get metadata about the segments currently in the buffer by using the `segment-metadata`
 text track. You can get the metadata of the currently rendered segment by looking at the
 track's `activeCues` array. The metadata will be attached to the `cue.value` property and
@@ -773,6 +861,7 @@ cue.value = {
 
 Example:
 Detect when a change in quality is rendered on screen
+
 ```javascript
 let tracks = player.textTracks();
 let segmentMetadataTrack;
@@ -810,8 +899,9 @@ In normal use, VHS accepts a URL as the source of the video. But VHS also has th
 to accept a JSON object as the source.
 
 Passing a JSON object as the source has many uses. A couple of examples include:
-* The manifest has already been downloaded, so there's no need to make another request
-* You want to change some aspect of the manifest, e.g., add a segment, without modifying
+
+- The manifest has already been downloaded, so there's no need to make another request
+- You want to change some aspect of the manifest, e.g., add a segment, without modifying
   the manifest itself
 
 In order to pass a JSON object as the source, provide a parsed manifest object in via a
@@ -838,6 +928,7 @@ and informally documented structure) provided in the README of
 project as `vhs-json`.
 
 ## Hosting Considerations
+
 Unlike a native HLS implementation, the HLS tech has to comply with
 the browser's security policies. That means that all the files that
 make up the stream must be served from the same domain as the page
@@ -847,12 +938,13 @@ configured. Easy [instructions are
 available](http://enable-cors.org/server.html) for popular webservers
 and most CDNs should have no trouble turning CORS on for your account.
 
-
 ## Known Issues and Workarounds
+
 Issues that are currenty known. If you want to
 help find a solution that would be appreciated!
 
 ### Fragmented MP4 Support
+
 Edge has native support for HLS but only in the MPEG2-TS container. If
 you attempt to play an HLS stream with fragmented MP4 segments (without
 [overriding native playback](#overridenative)), Edge will stall.
@@ -860,6 +952,7 @@ Fragmented MP4s are only supported on browsers that have
 [Media Source Extensions](http://caniuse.com/#feat=mediasource) available.
 
 ### Assets with an Audio-Only Rate Get Stuck in Audio-Only
+
 Some assets which have an audio-only rate and the lowest-bandwidth
 audio + video rate isn't that low get stuck in audio-only mode. This is
 because the initial bandwidth calculation thinks it there's insufficient
@@ -896,7 +989,7 @@ in issue [#256](https://github.com/videojs/http-streaming/issues/256).
 
 For testing, you run `npm run test`. You will need Chrome and Firefox for running the tests.
 
-_videojs-http-streaming uses [BrowserStack](https://browserstack.com) for compatibility testing._
+*videojs-http-streaming uses [BrowserStack](https://browserstack.com) for compatibility testing.*
 
 ## Debugging
 
@@ -909,13 +1002,15 @@ log level is not set to `debug`.
 a snapshot summary of various HLS and player stats. See [vhs.stats](#vhsstats) for details
 about what this object contains.
 
-__NOTE__: The `debug` level is only available in video.js v6.6.0+. With earlier versions of
+**NOTE**: The `debug` level is only available in video.js v6.6.0+. With earlier versions of
 video.js, no debug messages will be logged to console.
 
 ## Release History
+
 Check out the [changelog](CHANGELOG.md) for a summary of each release.
 
 ## Building
+
 To build a copy of videojs-http-streaming run the following commands
 
 ```bash
@@ -930,12 +1025,16 @@ videojs-http-streaming will have created all of the files for using it in a dist
 ## Development
 
 ### Tools
-* Download stream locally with the [HLS Fetcher](https://github.com/videojs/hls-fetcher)
-* Simulate errors with [Murphy](https://github.com/videojs/murphy)
-* Inspect content with [Thumbcoil](http://thumb.co.il)
+
+- Download stream locally with the [HLS Fetcher](https://github.com/videojs/hls-fetcher)
+
+- Simulate errors with [Murphy](https://github.com/videojs/murphy)
+- Inspect content with [Thumbcoil](http://thumb.co.il)
 
 ### Commands
+
 All commands for development are listed in the `package.json` file and are run using
+
 ```bash
 npm run <command>
 ```
@@ -944,8 +1043,5 @@ npm run <command>
 [slack-link]: http://slack.videojs.com
 [travis-icon]: https://travis-ci.org/videojs/http-streaming.svg?branch=main
 [travis-link]: https://travis-ci.org/videojs/http-streaming
-[issue-stats-link]: http://issuestats.com/github/videojs/http-streaming
-[issue-stats-pr-icon]: http://issuestats.com/github/videojs/http-streaming/badge/pr
-[issue-stats-issues-icon]: http://issuestats.com/github/videojs/http-streaming/badge/issue
 [greenkeeper-icon]: https://badges.greenkeeper.io/videojs/http-streaming.svg
 [greenkeeper-link]: https://greenkeeper.io/

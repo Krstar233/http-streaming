@@ -260,6 +260,7 @@ const transmuxAndNotify = ({
   segment,
   bytes,
   isPartial,
+  forceNoVideo,
   trackInfoFn,
   timingInfoFn,
   videoSegmentTimingInfoFn,
@@ -291,6 +292,9 @@ const transmuxAndNotify = ({
     const probeResult = probeTsSegment(bytes, segment.baseStartTime);
 
     if (probeResult) {
+      if (probeResult.hasVideo && forceNoVideo) {
+        probeResult.hasVideo = false;
+      }
       trackInfoFn(segment, {
         hasAudio: probeResult.hasAudio,
         hasVideo: probeResult.hasVideo,
@@ -318,9 +322,15 @@ const transmuxAndNotify = ({
     remux: isMuxed,
     onData: (result) => {
       result.type = result.type === 'combined' ? 'video' : result.type;
+      if (result.type === "video" && forceNoVideo) {
+        return;
+      }
       dataFn(segment, result);
     },
     onTrackInfo: (trackInfo) => {
+      if (trackInfo.hasVideo && forceNoVideo) {
+        trackInfo.hasVideo = false;
+      }
       if (trackInfoFn) {
         if (isMuxed) {
           trackInfo.isMuxed = true;
@@ -340,6 +350,10 @@ const transmuxAndNotify = ({
       }
     },
     onVideoTimingInfo: (videoTimingInfo) => {
+      if (forceNoVideo) {
+        return
+      }
+      
       // we only want the first start value we encounter
       if (videoStartFn && typeof videoTimingInfo.start !== 'undefined') {
         videoStartFn(videoTimingInfo.start);
@@ -351,12 +365,18 @@ const transmuxAndNotify = ({
       }
     },
     onVideoSegmentTimingInfo: (videoSegmentTimingInfo) => {
+      if (forceNoVideo) {
+        return
+      }
       videoSegmentTimingInfoFn(videoSegmentTimingInfo);
     },
     onAudioSegmentTimingInfo: (audioSegmentTimingInfo) => {
       audioSegmentTimingInfoFn(audioSegmentTimingInfo);
     },
     onId3: (id3Frames, dispatchType) => {
+      if (forceNoVideo) {
+        return
+      }
       id3Fn(segment, id3Frames, dispatchType);
     },
     onCaptions: (captions) => {
@@ -376,6 +396,9 @@ const transmuxAndNotify = ({
         return;
       }
       result.type = result.type === 'combined' ? 'video' : result.type;
+      if (result.type === 'video' && forceNoVideo) {
+        return
+      }
       doneFn(null, segment, result);
     }
   });
@@ -394,7 +417,8 @@ const handleSegmentBytes = ({
   isEndOfTimeline,
   endedTimelineFn,
   dataFn,
-  doneFn
+  doneFn,
+  forceNoVideo
 }) => {
   const bytesAsUint8Array = new Uint8Array(bytes);
 
@@ -518,6 +542,7 @@ const handleSegmentBytes = ({
     segment,
     bytes,
     isPartial,
+    forceNoVideo,
     trackInfoFn,
     timingInfoFn,
     videoSegmentTimingInfoFn,
@@ -557,6 +582,7 @@ const handleSegmentBytes = ({
  */
 const decryptSegment = ({
   decryptionWorker,
+  forceNoVideo,
   segment,
   trackInfoFn,
   timingInfoFn,
@@ -584,6 +610,7 @@ const decryptSegment = ({
         segment,
         bytes: segment.bytes,
         isPartial: false,
+        forceNoVideo,
         trackInfoFn,
         timingInfoFn,
         videoSegmentTimingInfoFn,
@@ -653,6 +680,7 @@ const decryptSegment = ({
 const waitForCompletion = ({
   activeXhrs,
   decryptionWorker,
+  forceNoVideo,
   trackInfoFn,
   timingInfoFn,
   videoSegmentTimingInfoFn,
@@ -700,6 +728,7 @@ const waitForCompletion = ({
       if (segment.encryptedBytes) {
         return decryptSegment({
           decryptionWorker,
+          forceNoVideo,
           segment,
           trackInfoFn,
           timingInfoFn,
@@ -718,6 +747,7 @@ const waitForCompletion = ({
         segment,
         bytes: segment.bytes,
         isPartial: false,
+        forceNoVideo,
         trackInfoFn,
         timingInfoFn,
         videoSegmentTimingInfoFn,
@@ -786,7 +816,8 @@ const handleProgress = ({
   isEndOfTimeline,
   endedTimelineFn,
   dataFn,
-  handlePartialData
+  handlePartialData,
+  forceNoVideo
 }) => (event) => {
   const request = event.target;
 
@@ -824,7 +855,8 @@ const handleProgress = ({
         captionsFn,
         isEndOfTimeline,
         endedTimelineFn,
-        dataFn
+        dataFn,
+        forceNoVideo
       });
     }
   }
@@ -924,7 +956,8 @@ export const mediaSegmentRequest = ({
   endedTimelineFn,
   dataFn,
   doneFn,
-  handlePartialData
+  handlePartialData,
+  forceNoVideo
 }) => {
   const activeXhrs = [];
   const finishProcessingFn = waitForCompletion({
@@ -938,6 +971,7 @@ export const mediaSegmentRequest = ({
     captionsFn,
     isEndOfTimeline,
     endedTimelineFn,
+    forceNoVideo,
     dataFn,
     doneFn
   });
@@ -1008,7 +1042,8 @@ export const mediaSegmentRequest = ({
       isEndOfTimeline,
       endedTimelineFn,
       dataFn,
-      handlePartialData
+      handlePartialData,
+      forceNoVideo
     })
   );
   activeXhrs.push(segmentXhr);
